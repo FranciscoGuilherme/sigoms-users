@@ -31,7 +31,10 @@ class LoggedUserController extends AbstractController
     public function logged(): JsonResponse
     {
         return new JsonResponse([
-            'message' => 'Logado como ' . $this->security->getUser()->getUsername()
+            'message' => 'Usuario logado',
+            'details' => [
+                'usuario' => $this->security->getUser()->getUsername()
+            ]
         ], Response::HTTP_OK);
     }
 }

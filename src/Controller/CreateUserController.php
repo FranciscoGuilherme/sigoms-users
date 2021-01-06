@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Helpers\UsersMessagesHelper as Helper;
 
 class CreateUserController extends AbstractController
 {
@@ -27,18 +28,25 @@ class CreateUserController extends AbstractController
         $username = $request->request->get('_username');
         $password = $request->request->get('_password');
 
-        $user = new User($username);
-        $user->setPassword($encoder->encodePassword($user, $password));
+        try {
+            $user = new User($username);
+            $user->setPassword($encoder->encodePassword($user, $password));
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-        return new JsonResponse([
-            'message' => 'Usuario ' . $user->getUsername() . ' criado com sucesso',
-            'details' => [
-                'id' => $user->getId()
-            ]
-        ], Response::HTTP_OK);
+            return new JsonResponse([
+                'message' => sprintf(Helper::USER_NEW_USER_MESAGE, $user->getUsername()),
+                'details' => [
+                    'id' => $user->getId()
+                ]
+            ], Response::HTTP_OK);
+        }
+        catch (\Exception $e) {
+            return new JsonResponse([
+                'message' => Helper::DB_SAVING_ERROR_MESSAGE
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

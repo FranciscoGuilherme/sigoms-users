@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Helpers\UsersMessagesHelper as Helper;
 
 class RoleUserController extends AbstractController
 {
@@ -27,15 +28,11 @@ class RoleUserController extends AbstractController
         $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
 
         if (!$user) {
-            return new JsonResponse([
-                'message' => 'Usuario nao encontrado'
-            ], Response::HTTP_NOT_FOUND);
+            return new JsonResponse(['message' => Helper::USER_NOT_FOUND_MESSAGE], Response::HTTP_NOT_FOUND);
         }
 
         if ($this->roleExists($user, $role)) {
-            return new JsonResponse([
-                'message' => 'Role ja configurada para o usuario'
-            ], Response::HTTP_OK);
+            return new JsonResponse(['message' => Helper::USER_ROLE_EXISTS_MESSAGE], Response::HTTP_OK);
         }
 
         try {
@@ -48,7 +45,7 @@ class RoleUserController extends AbstractController
             $entityManager->flush();
 
             return new JsonResponse([
-                'message' => 'Role ' . $role . ' adicionada ao usuario',
+                'message' => sprintf(Helper::USER_NEW_ROLE_MESSAGE, $role),
                 'details' => [
                     'roles' => $user->getRoles()
                 ]
@@ -56,7 +53,7 @@ class RoleUserController extends AbstractController
         }
         catch (\Exception $e) {
             return new JsonResponse([
-                'message' => 'Ocorreu um erro durante o salvamento'
+                'message' => Helper::DB_SAVING_ERROR_MESSAGE
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

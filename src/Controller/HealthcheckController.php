@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Helpers\UsersMessagesHelper as Helper;
 
 class HealthcheckController extends AbstractController
 {
@@ -33,11 +34,11 @@ class HealthcheckController extends AbstractController
         try {
             $this->entityManagerInterface->getConnection()->connect();
 
-            return new JsonResponse(['message' => 'Users em funcionamento.'], Response::HTTP_OK);
+            return new JsonResponse(['message' => 'Users em funcionamento'], Response::HTTP_OK);
         }
         catch (\Exception $e) {
             return new JsonResponse([
-                'message' => 'Problemas de conexão com o banco de dados.',
+                'message' => Helper::DB_CONECTION_ERROR_MESSAGE,
                 'details' => $e->getMessage()
             ], Response::HTTP_SERVICE_UNAVAILABLE);
         }
