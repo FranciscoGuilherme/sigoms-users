@@ -1,11 +1,11 @@
 steps:
   - name: "gcr.io/cloud-builders/gcloud"
-    id: "JWT Auth: regate da chave publica"
+    id: "JWT Auth: resgate da chave publica"
     entrypoint: "bash"
     args: [ '-c', 'gcloud secrets versions access latest --secret=sigoms_users_public_pem  > public.pem' ]
 
   - name: "gcr.io/cloud-builders/gcloud"
-    id: "JWT Auth: regate da chave privada"
+    id: "JWT Auth: resgate da chave privada"
     entrypoint: "bash"
     args: [ '-c', 'gcloud secrets versions access latest --secret=sigoms_users_private_pem  > private.pem' ]
 
@@ -15,15 +15,14 @@ steps:
       - "build"
       - "-t"
       - "gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"
-      - --build-arg
-      - "APP_ENV=${_APP_ENV} 
-        APP_SECRET=${_APP_SECRET} 
-        DATABASE_URL=${_DATABASE_URL} 
-        JWT_SECRET_KEY=${_JWT_SECRET_KEY} 
-        JWT_PUBLIC_KEY=${_JWT_PUBLIC_KEY} 
-        JWT_PASSPHRASE=${_JWT_PASSPHRASE} 
-        CORS_ALLOW_ORIGIN=${_CORS_ALLOW_ORIGIN}"
-      - "."
+      - "--build-arg APP_ENV='${_APP_ENV}' "
+      - "--build-arg APP_SECRET='${_APP_SECRET}' "
+      - "--build-arg DATABASE_URL='${_DATABASE_URL}' "
+      - "--build-arg JWT_SECRET_KEY='${_JWT_SECRET_KEY}' "
+      - "--build-arg JWT_PUBLIC_KEY='${_JWT_PUBLIC_KEY}' "
+      - "--build-arg JWT_PASSPHRASE='${_JWT_PASSPHRASE}' "
+      - "--build-arg CORS_ALLOW_ORIGIN='${_CORS_ALLOW_ORIGIN}'"
+      - "--no-cache ."
 
   - name: "gcr.io/cloud-builders/docker"
     id: "Push"
