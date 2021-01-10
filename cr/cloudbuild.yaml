@@ -16,6 +16,14 @@ steps:
       - "-t"
       - "gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"
       - "."
+    env:
+      - 'APP_ENV=${_APP_ENV}'
+      - 'APP_SECRET=${_APP_SECRET}'
+      - 'DATABASE_URL=${_DATABASE_URL}'
+      - 'JWT_SECRET_KEY=${_JWT_SECRET_KEY}'
+      - 'JWT_PUBLIC_KEY=${_JWT_PUBLIC_KEY}'
+      - 'JWT_PASSPHRASE=${_JWT_PASSPHRASE}'
+      - 'CORS_ALLOW_ORIGIN=${_CORS_ALLOW_ORIGIN}'
 
   - name: "gcr.io/cloud-builders/docker"
     id: "Push"
@@ -43,11 +51,3 @@ steps:
       - "sigoms-users-puc"
       - "--min-instances"
       - "1"
-    env:
-      - 'APP_ENV=${_APP_ENV}'
-      - 'APP_SECRET=${_APP_SECRET}'
-      - 'DATABASE_URL=${_DATABASE_URL}'
-      - 'JWT_SECRET_KEY=${_JWT_SECRET_KEY}'
-      - 'JWT_PUBLIC_KEY=${_JWT_PUBLIC_KEY}'
-      - 'JWT_PASSPHRASE=${_JWT_PASSPHRASE}'
-      - 'CORS_ALLOW_ORIGIN=${_CORS_ALLOW_ORIGIN}'
