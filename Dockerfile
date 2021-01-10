@@ -23,6 +23,7 @@ RUN cd /app && composer install
 RUN chmod +x /app/bin/console
 RUN mkdir -p /app/config/jwt
 
+ONBUILD COPY public.pem /app/config/jwt/public.pem
 ONBUILD COPY private.pem /app/config/jwt/private.pem
 
 # ----------------------------------------------
