@@ -1,0 +1,53 @@
+steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+      id: "JWT Auth: regate da chave publica"
+      entrypoint: "bash"
+      args: [ '-c', 'gcloud secrets versions access latest --secret=sigoms_users_public_pem  > public.pem' ]
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    id: "JWT Auth: regate da chave privada"
+    entrypoint: "bash"
+    args: [ '-c', 'gcloud secrets versions access latest --secret=sigoms_users_private_pem  > private.pem' ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    id: "Build"
+    args:
+      - "build"
+      - "-t"
+      - "gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"
+      - "."
+
+  - name: "gcr.io/cloud-builders/docker"
+    id: "Push"
+    args:
+      - "push"
+      - "gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    id: "Deploy"
+    args:
+      - "run"
+      - "deploy"
+      - "sigoms-users"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"
+      - "--platform"
+      - "gke"
+      - "--cluster"
+      - "cluster-puc"
+      - "--cluster-location"
+      - "us-east1-b"
+      - "--port"
+      - "80"
+      - "--namespace"
+      - "sigoms-users-puc"
+      - "--min-instances"
+      - "1"
+      - "--update-secrets"
+      - "APP_ENV=puc-users-env:APP_ENV,
+        APP_SECRET=puc-users-env:APP_SECRET,
+        DATABASE_URL=puc-users-env:DATABASE_URL,
+        JWT_SECRET_KEY=puc-users-env:JWT_SECRET_KEY,
+        JWT_PUBLIC_KEY=puc-users-env:JWT_PUBLIC_KEY,
+        JWT_PASSPHRASE=puc-users-env:JWT_PASSPHRASE,
+        CORS_ALLOW_ORIGIN=puc-users-env:CORS_ALLOW_ORIGIN"
