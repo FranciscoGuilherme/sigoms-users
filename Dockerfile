@@ -19,7 +19,7 @@ COPY . /app
 # ----------[Configuração do ambiente]----------
 # ----------------------------------------------
 
-RUN cd /app && composer install
+RUN cd /app && composer install --no-dev
 RUN chmod +x /app/bin/console
 RUN mkdir -p /app/config/jwt
 
