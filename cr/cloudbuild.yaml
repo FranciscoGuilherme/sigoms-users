@@ -1,8 +1,8 @@
 steps:
   - name: "gcr.io/cloud-builders/gcloud"
-      id: "JWT Auth: regate da chave publica"
-      entrypoint: "bash"
-      args: [ '-c', 'gcloud secrets versions access latest --secret=sigoms_users_public_pem  > public.pem' ]
+    id: "JWT Auth: regate da chave publica"
+    entrypoint: "bash"
+    args: [ '-c', 'gcloud secrets versions access latest --secret=sigoms_users_public_pem  > public.pem' ]
 
   - name: "gcr.io/cloud-builders/gcloud"
     id: "JWT Auth: regate da chave privada"
