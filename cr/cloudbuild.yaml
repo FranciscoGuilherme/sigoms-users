@@ -43,11 +43,11 @@ steps:
       - "sigoms-users-puc"
       - "--min-instances"
       - "1"
-      - "--update-secrets"
-      - "APP_ENV=puc-users-env:APP_ENV,
-        APP_SECRET=puc-users-env:APP_SECRET,
-        DATABASE_URL=puc-users-env:DATABASE_URL,
-        JWT_SECRET_KEY=puc-users-env:JWT_SECRET_KEY,
-        JWT_PUBLIC_KEY=puc-users-env:JWT_PUBLIC_KEY,
-        JWT_PASSPHRASE=puc-users-env:JWT_PASSPHRASE,
-        CORS_ALLOW_ORIGIN=puc-users-env:CORS_ALLOW_ORIGIN"
+    env:
+      - 'APP_ENV=${_APP_ENV}'
+      - 'APP_SECRET=${_APP_SECRET}'
+      - 'DATABASE_URL=${_DATABASE_URL}'
+      - 'JWT_SECRET_KEY=${_JWT_SECRET_KEY}'
+      - 'JWT_PUBLIC_KEY=${_JWT_PUBLIC_KEY}'
+      - 'JWT_PASSPHRASE=${_JWT_PASSPHRASE}'
+      - 'CORS_ALLOW_ORIGIN=${_CORS_ALLOW_ORIGIN}'
