@@ -14,7 +14,7 @@ steps:
     args:
       - "build"
       - '-t', 
-      - 'gcr.io/$PROJECT_ID/sigoms-users:$TAG_NAME',
+      - 'gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA',
       - '-t', 
       - 'gcr.io/$PROJECT_ID/sigoms-users:latest',
       - "--build-arg"
@@ -33,6 +33,12 @@ steps:
       - "CORS_ALLOW_ORIGIN=${_CORS_ALLOW_ORIGIN}"
       - "."
 
+  - name: "gcr.io/cloud-builders/docker"
+    id: "Push"
+    args:
+      - "push"
+      - "gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"
+
   - name: "gcr.io/cloud-builders/kubectl"
     args: ["apply", "-f", "kube/"]
     env:
@@ -45,12 +51,12 @@ steps:
       'image', 
       'deployment', 
       'sigoms-users', 
-      'sigoms-users=gcr.io/$PROJECT_ID/sigoms-users:$TAG_NAME'
+      'sigoms-users=gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA'
     ]
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
       - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-puc'
     images: [
-      'gcr.io/$PROJECT_ID/sigoms-users:$TAG_NAME',
+      'gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA',
       'gcr.io/$PROJECT_ID/sigoms-users:latest'
     ]
