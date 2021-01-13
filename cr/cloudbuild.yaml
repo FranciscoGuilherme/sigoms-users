@@ -32,7 +32,7 @@ steps:
       - "."
 
   - name: "gcr.io/cloud-builders/kubectl"
-    args: ["set", "image", "deployment/sigoms-users-puc", "frontend=gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"]
+    args: ["set", "image", "deployment/sigoms-users-puc", "sigoms-users-puc=gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"]
     env:
       - "CLOUDSDK_COMPUTE_ZONE=us-east1-b"
       - "CLOUDSDK_CONTAINER_CLUSTER=cluster-sigo"
@@ -54,7 +54,7 @@ steps:
       - "--platform"
       - "gke"
       - "--cluster"
-      - "cluster-puc"
+      - "cluster-sigo"
       - "--cluster-location"
       - "us-east1-b"
       - "--port"
