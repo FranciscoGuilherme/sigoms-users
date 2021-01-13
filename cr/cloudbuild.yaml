@@ -34,8 +34,8 @@ steps:
   - name: "gcr.io/cloud-builders/kubectl"
     args: ["set", "image", "deployment/sigoms-users-puc", "frontend=gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"]
     env:
-    - "CLOUDSDK_COMPUTE_ZONE=us-east1-b"
-    - "CLOUDSDK_CONTAINER_CLUSTER=cluster-sigo"
+      - "CLOUDSDK_COMPUTE_ZONE=us-east1-b"
+      - "CLOUDSDK_CONTAINER_CLUSTER=cluster-sigo"
 
   - name: "gcr.io/cloud-builders/docker"
     id: "Push"
