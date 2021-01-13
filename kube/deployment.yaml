@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: sigoms-users
+  name: sigoms-users
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: sigoms-users
+  template:
+    metadata:
+      labels:
+        run: sigoms-users
+    spec:
+      containers:
+      - image: gcr.io/$PROJECT_ID/sigoms-users:latest
+        name: sigoms-users
+        ports:
+        - containerPort: 80
