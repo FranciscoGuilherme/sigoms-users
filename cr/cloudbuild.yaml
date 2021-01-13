@@ -31,12 +31,6 @@ steps:
       - "CORS_ALLOW_ORIGIN=${_CORS_ALLOW_ORIGIN}"
       - "."
 
-  - name: "gcr.io/cloud-builders/kubectl"
-    args: ["set", "image", "deployment/sigoms-users-puc", "sigoms-users-puc=gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"]
-    env:
-      - "CLOUDSDK_COMPUTE_ZONE=us-east1-b"
-      - "CLOUDSDK_CONTAINER_CLUSTER=cluster-sigo"
-
   - name: "gcr.io/cloud-builders/docker"
     id: "Push"
     args:
