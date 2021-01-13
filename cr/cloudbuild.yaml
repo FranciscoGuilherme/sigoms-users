@@ -48,7 +48,7 @@ steps:
       - "--platform"
       - "gke"
       - "--cluster"
-      - "cluster-sigo"
+      - "cluster-puc"
       - "--cluster-location"
       - "us-east1-b"
       - "--port"
