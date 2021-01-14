@@ -57,3 +57,24 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
       - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-puc'
 
+  - name: "gcr.io/cloud-builders/gcloud"
+    id: "Deploy"
+    args:
+      - "run"
+      - "deploy"
+      - "sigoms-users"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/sigoms-users:$SHORT_SHA"
+      - "--platform"
+      - "gke"
+      - "--cluster"
+      - "cluster-puc"
+      - "--cluster-location"
+      - "us-east1-b"
+      - "--port"
+      - "80"
+      - "--namespace"
+      - "sigoms-users-puc"
+      - "--min-instances"
+      - "1"
+

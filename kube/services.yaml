@@ -1,18 +1,14 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: sigoms-users
   annotations:
     cloud.google.com/neg: '{"ingress":true}'
 spec:
-  selector:
-     run: sigoms-users
-  ports:
-  - nodePort: 32436
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: sigoms-users-puc
-  sessionAffinity: None
   type: LoadBalancer
+  selector:
+     app: sigoms-users
+  ports:
+  - port: 80
+    targetPort: 80
+
