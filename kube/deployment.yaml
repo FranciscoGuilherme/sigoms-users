@@ -8,11 +8,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: sigoms-users
+      run: sigoms-users
   template:
     metadata:
       labels:
-        app: sigoms-users
+        run: sigoms-users
     spec:
       containers:
       - name: sigoms-users

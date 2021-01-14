@@ -7,7 +7,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-     app: sigoms-users
+    run: sigoms-users
   ports:
   - port: 80
     targetPort: 80
