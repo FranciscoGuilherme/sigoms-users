@@ -45,8 +45,14 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
+        listmodules:
+            pattern: ^/modules
+            stateless: true
+            anonymous: true
+
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/users/create, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/users/logged, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/users/roles/add, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/modules, roles: IS_AUTHENTICATED_ANONYMOUSLY }
