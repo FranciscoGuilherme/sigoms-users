@@ -31,13 +31,6 @@ on:
 
 name: Deploy to Amazon ECS
 
-artifacts:
-  files:
-    - '**/*'
-  base-directory: base_dir
-  name: backend-build-artifact
-  discard-path: no
-
 jobs:
   deploy:
     name: Deploy
