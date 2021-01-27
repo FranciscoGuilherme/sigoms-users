@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Interfaces\SoapClientInterface;
+use App\Helpers\MessagesHelper\OrdersMessagesHelper as Helper;
 
 class OrdersController extends AbstractController
 {
@@ -43,7 +44,7 @@ class OrdersController extends AbstractController
         }
         catch (\Exception $e) {
             return new JsonResponse([
-                'message' => 'Nao foi possivel conectar-se ao host',
+                'message' => Helper::ORDERS_ERROR_CONNECTION_MESSAGE,
                 'details' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
