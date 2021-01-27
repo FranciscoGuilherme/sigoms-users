@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Helpers\MessagesHelper;
 
-use App\Helpers\GlobalHelper;
+use App\Helpers\GlobalMessagesHelper;
 
-class ModulesHelper extends GlobalHelper
+class ModulesMessagesHelper extends GlobalMessagesHelper
 {
     const MODULE_NOT_FOUND_MESSAGE = 'Modulo nao encontrado';
     const MODULE_NEW_MODULE_MESAGE = 'Modulo %s criado com sucesso';

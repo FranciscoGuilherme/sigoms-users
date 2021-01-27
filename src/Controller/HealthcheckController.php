@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Helpers\UsersHelper as Helper;
+use App\Helpers\UsersMessagesHelper as Helper;
 
 class HealthcheckController extends AbstractController
 {

@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Helpers\UsersHelper as Helper;
+use App\Helpers\UsersMessagesHelper as Helper;
 
 class CreateUserController extends AbstractController
 {
