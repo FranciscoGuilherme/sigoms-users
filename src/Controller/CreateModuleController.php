@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Entity\ModulesEntity;
 use App\Repository\ModulesRepository;
-use App\Helpers\ModulesMessagesHelper as Helper;
+use App\Helpers\MessagesHelper\ModulesMessagesHelper as Helper;
 
 class CreateModuleController extends AbstractController
 {

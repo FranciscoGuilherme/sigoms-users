@@ -45,7 +45,8 @@ class CreateUserController extends AbstractController
         }
         catch (\Exception $e) {
             return new JsonResponse([
-                'message' => Helper::DB_SAVING_ERROR_MESSAGE
+                'message' => Helper::DB_SAVING_ERROR_MESSAGE,
+                'details' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
