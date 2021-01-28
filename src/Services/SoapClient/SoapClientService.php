@@ -18,7 +18,7 @@ final class SoapClientService implements SoapClientInterface
     public function connect(string $host): void
     {
         try {
-            $this->soapClient = new SoapClient($host);
+            $this->soapClient = new SoapClient($host, ['cache_wsdl' => WSDL_CACHE_NONE]);
             $this->soapClient->__setLocation($host);
         }
         catch (\Exception $e) {

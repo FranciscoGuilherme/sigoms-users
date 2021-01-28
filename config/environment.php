@@ -8,8 +8,8 @@ return [
         |--------------------------------------------------------------------------
         */
         'orders' => [
-            'service' => $_ENV['LEGACY_GPI'],
-            'resource' => 'hello'
+            'service' => $_ENV['LEGACY_GPI_SERVICE'],
+            'resource' => $_ENV['LEGACY_GPI_RESOURCE']
         ]
     ]
 ];

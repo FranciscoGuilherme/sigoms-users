@@ -2,7 +2,7 @@
 
 namespace App\Helpers\MessagesHelper;
 
-use App\Helpers\GlobalMessagesHelper;
+use App\Helpers\MessagesHelper\GlobalMessagesHelper;
 
 class ModulesMessagesHelper extends GlobalMessagesHelper
 {
