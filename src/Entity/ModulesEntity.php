@@ -38,6 +38,11 @@ class ModulesEntity
      */
     private string $description;
 
+    /**
+     * @ORM\Column(type="string", length=100, name="`user_role`", nullable=true)
+     */
+    private string $userRole;
+
     public function getId(): int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class ModulesEntity
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getUserRole(): string
+    {
+        return $this->userRole;
+    }
+
+    public function setUserRole(string $userRole): self
+    {
+        $this->userRole = $userRole;
 
         return $this;
     }

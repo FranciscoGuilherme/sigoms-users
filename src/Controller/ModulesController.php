@@ -14,7 +14,7 @@ use App\Repository\ModulesRepository;
 class ModulesController extends AbstractController
 {
     /**
-     * @var ModulesRepository
+     * @var ModulesRepository $modulesRepository
      */
     private ModulesRepository $modulesRepository;
 

@@ -43,6 +43,7 @@ class CreateModuleController extends AbstractController
         $route = $request->request->get('route');
         $imageName = $request->request->get('imageName');
         $description = $request->request->get('description');
+        $role = $description = $request->request->get('role');
 
         try {
             $module = new ModulesEntity();
@@ -50,6 +51,7 @@ class CreateModuleController extends AbstractController
             $module->setRoute($route);
             $module->setImageName($imageName);
             $module->setDescription($description);
+            $module->setUserRole($role);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($module);

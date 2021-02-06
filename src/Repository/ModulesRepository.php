@@ -19,4 +19,20 @@ class ModulesRepository extends EntityRepository
             )
             ->getResult();
     }
+
+    public function findByRole(string $role)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT
+                    module.name,
+                    module.route,
+                    module.imageName,
+                    module.description,
+                    module.userRole
+                 FROM App:ModulesEntity module
+                 WHERE module.userRole LIKE \'' . $role . '\''
+            )
+            ->getResult();
+    }
 }
